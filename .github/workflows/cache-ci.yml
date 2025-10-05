@@ -1,8 +1,9 @@
-name: Cache Test
+name: Cache CI Speedup
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
@@ -12,11 +13,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Cache dependencies
-        id: cache-step
+        id: cache-deps
         uses: actions/cache@v4
         with:
           path: ~/.cache/myapp
           key: cache-e2b7d50
 
       - name: prime-cache-e2b7d50
-        run: echo "Cache status: ${{ steps.cache-step.outputs.cache-hit }}"
+        run: echo "Cache status: ${{ steps.cache-deps.outputs.cache-hit }}"
+
